@@ -99,7 +99,7 @@ class AttributesForm(forms.ModelForm):
             initial=None,
             **kwargs):
 
-        if instance.pk:
+        if instance and instance.pk:
             initial = self._get_initial_data(instance)
 
         super().__init__(
