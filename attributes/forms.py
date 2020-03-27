@@ -1,11 +1,11 @@
 
 from django import forms
+from django.apps import apps
 from django.utils.translation import ugettext
 from django.core.exceptions import ValidationError
 from django.utils.functional import cached_property
 
-from apps.products.models import Product
-
+from attributes.settings import ATTRIBUTES_ENTRY_MODEL
 from attributes.models import (
     Attribute,
     AttributeValue,
@@ -171,5 +171,5 @@ class AttributesForm(forms.ModelForm):
         js = ('attrs/form.js', )
 
     class Meta:
-        model = Product
+        model = apps.get_model(ATTRIBUTES_ENTRY_MODEL)
         fields = ['id']
