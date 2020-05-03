@@ -1,11 +1,11 @@
 
 from django import forms
-from django.apps import apps
 from django.utils.translation import ugettext
 from django.core.exceptions import ValidationError
 from django.utils.functional import cached_property
 
-from attributes.settings import ATTRIBUTES_ENTRY_MODEL
+from apps.products.models import Product
+
 from attributes.models import (
     Attribute,
     AttributeValue,
@@ -159,7 +159,7 @@ class AttributesForm(forms.ModelForm):
 
             if attr.full_slug in self.cleaned_data:
                 value = self.cleaned_data[attr.full_slug]
-                attr.save_value(self.instance, value)
+                attr.save_value(instance, value)
 
         return instance
 
@@ -171,5 +171,5 @@ class AttributesForm(forms.ModelForm):
         js = ('attrs/form.js', )
 
     class Meta:
-        model = apps.get_model(ATTRIBUTES_ENTRY_MODEL)
+        model = Product
         fields = ['id']

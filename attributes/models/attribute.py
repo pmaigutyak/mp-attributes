@@ -10,7 +10,7 @@ from ordered_model.models import (
 
 from attributes.models.attribute_value import AttributeValue, VALUE_FIELDS
 from attributes.settings import ATTRIBUTES_CATEGORY_MODEL
-from attributes.constants import ATTR_TYPE_TEXT, ATTR_TYPE_SELECT, ATTR_TYPES
+from attributes.constants import ATTR_TYPE_SELECT, ATTR_TYPES
 
 
 class AttributeQuerySet(OrderedModelQuerySet):
@@ -61,7 +61,7 @@ class Attribute(OrderedModel):
 
     type = models.PositiveSmallIntegerField(
         choices=ATTR_TYPES,
-        default=ATTR_TYPE_TEXT,
+        default=ATTR_TYPE_SELECT,
         null=False,
         verbose_name=_("Type"))
 
@@ -142,28 +142,21 @@ class Attribute(OrderedModel):
 
     def save_value(self, entry, value):
 
+        params = {'entry': entry, 'attr': self}
+
+        if not value:
+            AttributeValue.objects.filter(**params).delete()
+            return None
+
         try:
-            val_obj = AttributeValue.objects.get(entry=entry, attr=self)
-
-            if not value:
-                val_obj.delete()
-                return None
-
-            val_obj.value = value
-            val_obj.save()
-
-            return val_obj
-
+            attr_value = AttributeValue.objects.get(**params)
         except AttributeValue.DoesNotExist:
+            attr_value = AttributeValue(**params)
 
-            if not value:
-                return None
+        attr_value.value = value
+        attr_value.save()
 
-            val_obj = AttributeValue(entry=entry, attr=self)
-            val_obj.value = value
-            val_obj.save()
-
-            return val_obj
+        return attr_value
 
     class Meta:
         ordering = ['order']

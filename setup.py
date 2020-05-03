@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-version = '0.3'
+version = '0.4'
 url = 'https://github.com/pmaigutyak/mp-attributes'
 
 with open('requirements.txt') as f:

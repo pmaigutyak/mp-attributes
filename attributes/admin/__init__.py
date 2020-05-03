@@ -31,6 +31,12 @@ class AttributeAdmin(OrderedModelAdmin, _get_attribute_admin_base_class()):
     search_fields = ['name', 'slug']
     list_filter = ['categories', 'type', 'is_required']
     filter_horizontal = ['categories']
+    fields = [
+        'categories',
+        'name',
+        ('is_required', 'is_visible', 'is_filter', ),
+        ('type', 'slug', ),
+    ]
 
     def get_category_list(self, item):
         return ', '.join([c.name for c in item.categories.all()])
