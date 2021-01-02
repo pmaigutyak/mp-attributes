@@ -2,10 +2,10 @@
 import six
 
 from django.db import models
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from attributes.managers import AttributeValueManager
-from attributes.settings import ATTRIBUTES_ENTRY_MODEL
 from attributes.constants import (
     ATTR_TYPE_TEXT,
     ATTR_TYPE_INT,
@@ -42,7 +42,7 @@ class AttributeValue(models.Model):
         on_delete=models.CASCADE)
 
     entry = models.ForeignKey(
-        ATTRIBUTES_ENTRY_MODEL,
+        settings.ATTRIBUTES_ENTRY_MODEL,
         related_name='attr_values',
         on_delete=models.CASCADE)
 

@@ -1,5 +1,6 @@
 
 from django.db import models
+from django.conf import settings
 from django.forms import CharField, ModelChoiceField
 from django.utils.translation import ugettext, ugettext_lazy as _
 
@@ -9,7 +10,6 @@ from ordered_model.models import (
     OrderedModelQuerySet)
 
 from attributes.models.attribute_value import AttributeValue, VALUE_FIELDS
-from attributes.settings import ATTRIBUTES_CATEGORY_MODEL
 from attributes.constants import ATTR_TYPE_SELECT, ATTR_TYPES
 
 
@@ -43,7 +43,7 @@ class AttributeManager(OrderedModelManager):
 class Attribute(OrderedModel):
 
     categories = models.ManyToManyField(
-        ATTRIBUTES_CATEGORY_MODEL,
+        settings.ATTRIBUTES_CATEGORY_MODEL,
         related_name='attributes',
         blank=True,
         verbose_name=_("Categories"))

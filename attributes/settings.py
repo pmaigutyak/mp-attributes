@@ -1,11 +1,16 @@
 
-from django.conf import settings
-
 from attributes import defaults
 
 
-ATTRIBUTES_CATEGORY_MODEL = getattr(
-    settings, 'ATTRIBUTES_CATEGORY_MODEL', defaults.ATTRIBUTES_CATEGORY_MODEL)
+class AttributeSettings(object):
 
-ATTRIBUTES_ENTRY_MODEL = getattr(
-    settings, 'ATTRIBUTES_ENTRY_MODEL', defaults.ATTRIBUTES_ENTRY_MODEL)
+    ATTRIBUTES_CATEGORY_MODEL = defaults.ATTRIBUTES_CATEGORY_MODEL
+    ATTRIBUTES_ENTRY_MODEL = defaults.ATTRIBUTES_ENTRY_MODEL
+
+    @property
+    def INSTALLED_APPS(self):
+        return super().INSTALLED_APPS + [
+            'attributes'
+        ]
+
+default = AttributeSettings
