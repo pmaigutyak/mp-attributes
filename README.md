@@ -1,11 +1,26 @@
-# MP-attributes
+Installation:
 
-Django attributes app.
+* Install `django-mp-attributes`
 
-### Installation
+* Add `'attributes.settings.default'` to settings factory.
 
-Install with pip:
+* Add `'attributes',` to admin fields.
 
+* Form field:
 ```
-pip install django-mp-attributes
+from attributes.fields import AttributesFormField
+
+class Form(...):
+
+    attributes = AttributesFormField(label='')
+
+    def __init__(self, *args, **kwargs):
+
+        super(ProductForm, self).__init__(*args, **kwargs)
+
+        self.fields['attributes'].init_form(*args, **kwargs)
+
+    def commit(self, product):
+
+        self.fields['attributes'].commit(product)
 ```
