@@ -15,4 +15,5 @@ media
 static-collect
 debug.log
 dist
+build
 django_mp_attributes.egg-info
