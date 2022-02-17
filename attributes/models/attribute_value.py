@@ -42,7 +42,7 @@ class AttributeValue(models.Model):
         on_delete=models.CASCADE)
 
     entry = models.ForeignKey(
-        settings.ATTRIBUTES_ENTRY_MODEL,
+        'products.Product',
         related_name='attr_values',
         on_delete=models.CASCADE)
 

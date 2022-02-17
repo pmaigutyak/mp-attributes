@@ -2,13 +2,14 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-from django.conf import settings
 
 class Migration(migrations.Migration):
 
     initial = True
 
     dependencies = [
+        ('categories', '0001_initial'),
+        ('products', '0001_initial'),
     ]
 
     operations = [
@@ -23,7 +24,7 @@ class Migration(migrations.Migration):
                 ('is_required', models.BooleanField(default=False, help_text='You will not be able to update record without filling this field', verbose_name='Required')),
                 ('is_visible', models.BooleanField(default=True, help_text='Display this attribute for users', verbose_name='Is visible')),
                 ('is_filter', models.BooleanField(default=False, help_text='Display this attribute in records filter', verbose_name='Is filter')),
-                ('categories', models.ManyToManyField(blank=True, related_name='attributes', to=settings.ATTRIBUTES_CATEGORY_MODEL, verbose_name='Categories')),
+                ('categories', models.ManyToManyField(blank=True, related_name='attributes', to='categories.Category', verbose_name='Categories')),
             ],
             options={
                 'verbose_name': 'Attribute',
@@ -51,7 +52,7 @@ class Migration(migrations.Migration):
                 ('value_int', models.IntegerField(blank=True, null=True)),
                 ('value_bool', models.NullBooleanField()),
                 ('attr', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='values', to='attributes.Attribute')),
-                ('entry', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='attr_values', to=settings.ATTRIBUTES_ENTRY_MODEL)),
+                ('entry', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='attr_values', to='products.Product')),
                 ('value_option', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='attr_values', to='attributes.AttributeOption')),
             ],
             options={

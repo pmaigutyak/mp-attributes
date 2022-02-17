@@ -43,7 +43,7 @@ class AttributeManager(OrderedModelManager):
 class Attribute(OrderedModel):
 
     categories = models.ManyToManyField(
-        settings.ATTRIBUTES_CATEGORY_MODEL,
+        'categories.Category',
         related_name='attributes',
         blank=True,
         verbose_name=_("Categories"))
