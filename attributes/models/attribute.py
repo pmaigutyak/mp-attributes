@@ -2,7 +2,7 @@
 from django.db import models
 from django.conf import settings
 from django.forms import CharField, ModelChoiceField
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 
 from ordered_model.models import (
     OrderedModel,
@@ -137,7 +137,7 @@ class Attribute(OrderedModel):
         return field
 
     def build_option_form_field(self):
-        label = self.name + ugettext(' [New value]')
+        label = self.name + gettext(' [New value]')
         return CharField(label=label, required=False)
 
     def save_value(self, entry, value):

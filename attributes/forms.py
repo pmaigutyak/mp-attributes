@@ -1,6 +1,6 @@
 
 from django import forms
-from django.utils.translation import ugettext
+from django.utils.translation import gettext
 from django.core.exceptions import ValidationError
 from django.utils.functional import cached_property
 
@@ -147,7 +147,7 @@ class AttributesForm(forms.ModelForm):
 
                 if not data.get(attr.full_slug) and attr.is_required:
                     raise ValidationError({
-                        attr.full_slug: ugettext('{} is required').format(
+                        attr.full_slug: gettext('{} is required').format(
                             attr.name)
                     })
 

@@ -3,7 +3,7 @@ from importlib import import_module
 
 from django.apps import apps
 from django.contrib import admin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from ordered_model.admin import OrderedModelAdmin
 
