@@ -16,7 +16,7 @@ ATTR_VALUE_TEXT = models.TextField(blank=True, null=True)
 
 ATTR_VALUE_INT = models.IntegerField(blank=True, null=True)
 
-ATTR_VALUE_BOOL = models.NullBooleanField(blank=True)
+ATTR_VALUE_BOOL = models.BooleanField(blank=True, null=True)
 
 ATTR_VALUE_OPTION = models.ForeignKey(
     'attributes.AttributeOption',
